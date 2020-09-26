@@ -6,7 +6,7 @@ import {wait} from "@testing-library/react";
 
 fetchMock.enableMocks();
 
-describe("useMovies query", () => {
+describe("useMovieSearch query", () => {
   beforeEach(() => {
     fetchMock.resetMocks();
   });
