@@ -1,6 +1,6 @@
 import React from "react";
 import {MovieItem, MovieItemPlaceholder} from "./MovieItem";
-import styled from "styled-components";
+import {Container} from "@material-ui/core";
 
 export type MovieResult = {
   Title: string,
@@ -12,20 +12,15 @@ export type MovieResult = {
 
 export const MOVIE_LIST_CONTAINER_TESTID = 'movieListContainerTestid';
 
-export function MoviesList({movies}: { movies: MovieResult[] }) {
+export function MoviesList({loading, movies}: { loading: boolean, movies: MovieResult[] }) {
+
   return (
-    <ListContainer data-testid={MOVIE_LIST_CONTAINER_TESTID}>
-      <ul>
-        {(movies.length > 0) ? (
-          movies.map((movie: MovieResult) => (<MovieItem movie={movie}/>))
+    <Container data-testid={MOVIE_LIST_CONTAINER_TESTID}>
+        {(movies && movies.length > 0) ? (
+          movies.map((movie: MovieResult) => (<MovieItem key={movie.imdbID} movie={movie}/>))
         ) : (
-          <MovieItemPlaceholder/>
+          loading && <MovieItemPlaceholder />
         )}
-      </ul>
-    </ListContainer>
+    </Container>
   );
 }
-
-const ListContainer = styled.div`
-  width: 720px;
-`

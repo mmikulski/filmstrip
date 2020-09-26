@@ -11,14 +11,6 @@ describe("useMovies query", () => {
     fetchMock.resetMocks();
   });
 
-  it("has initial state", () => {
-    fetchMock.mockResponseOnce('');
-    const {result} = renderHook(() => useMovies(initialState));
-
-    expect(result.current.movies).toEqual(initialState);
-  })
-
-
   it("fetches data", async () => {
     const response = {abc: 'abc'};
     fetchMock.mockResponseOnce(JSON.stringify(response));
@@ -49,12 +41,11 @@ describe("useMovies query", () => {
     })
 
     expect(fetchMock).toBeCalledTimes(1);
-    expect(fetchMock).toBeCalledWith(expect.stringContaining(keyword));
+    expect(fetchMock).toBeCalledWith(expect.stringContaining(keyword), expect.anything());
   });
 
   it("returns search results", async () => {
-    const response = {
-      "Search": [
+    const response = [
         {
           "Title": "Blade Runner",
           "Year": "1982",
@@ -69,8 +60,7 @@ describe("useMovies query", () => {
           "Type": "movie",
           "Poster": "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SX300.jpg"
         }
-      ]
-    };
+      ];
 
     fetchMock.mockResponseOnce(JSON.stringify(response));
 
@@ -83,7 +73,6 @@ describe("useMovies query", () => {
     })
 
     expect(fetchMock).toBeCalledTimes(1);
-    expect(result.current.data).toHaveProperty('Search');
-    expect(result.current.data.Search).toHaveLength(response.Search.length);
+    expect(result.current.data).toHaveLength(response.length);
   })
 });

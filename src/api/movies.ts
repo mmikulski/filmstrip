@@ -1,25 +1,35 @@
 import {useQuery} from 'react-query';
-import {useState} from "react";
 
 export const initialState = [];
-const apiKey = "sdfd";
+const baseUrl = 'http://www.omdbapi.com/?';
+const apiKey = "157f34ed";
 
 export const useMovieSearch = (keyword: string) => {
   const apiKeyParam = 'apiKey=' + apiKey;
   const searchParam = 's=' + keyword;
+
   return useQuery(
-    'movies',
-    async () => fetch('http://www.omdbapi.com/?' + apiKeyParam + "&" + searchParam)
-      .then((res) => {
-        return res.json();
-      })
+    ['movies', keyword],
+    async () => {
+      return fetch(
+        baseUrl + apiKeyParam + "&" + searchParam,
+        {
+          method: "GET",
+          redirect: 'follow',
+          headers: {
+            Accept: 'application/json',
+          }
+        }
+      ).then(
+        async (res) => {
+          let data =  await res.json();
+          if (data && data.Search) {
+             data = data.Search
+          }
+
+          return data;
+        }
+      );
+    }
   );
-}
-
-export const useMovies = (initialState: Array<any>) => {
-  const [movies, setMovies] = useState(initialState);
-
-  const {isLoading, data} = useMovieSearch("");
-
-  return {movies, data, useMovieSearch};
 }

@@ -1,22 +1,19 @@
 import React from 'react';
 import './App.css';
-import {MovieResult, MoviesList} from "./components/MoviesList";
+import {MovieSearch} from "./components/MovieSearch";
+import {QueryCache, ReactQueryCacheProvider} from "react-query";
+import { ReactQueryDevtools } from "react-query-devtools";
+
+const queryCache = new QueryCache();
 
 function App() {
-  const movies: MovieResult[] = [
-    // {
-    //   Title: "A title",
-    //   Year: '2000',
-    //   imdbID: 'qwe',
-    //   Type: 'sdf',
-    //   Poster: 'dsfsd'
-    // }
-  ]
-
   return (
     <div className="App">
       <header className="App-header">
-        <MoviesList movies={movies} />
+        <ReactQueryCacheProvider queryCache={queryCache}>
+          <MovieSearch />
+          <ReactQueryDevtools initialIsOpen />
+        </ReactQueryCacheProvider>
       </header>
     </div>
   );

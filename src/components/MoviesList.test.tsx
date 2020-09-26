@@ -27,8 +27,8 @@ describe("MoviesList", () => {
       }
     ];
 
-    const {container} = render(<MoviesList movies={movies}/>);
+    const {container} = render(<MoviesList loading={false} movies={movies}/>);
 
-    expect(container.querySelector('ul').childElementCount).toEqual(movies.length);
+    expect(container.firstChild.childElementCount).toEqual(movies.length);
   });
 });
