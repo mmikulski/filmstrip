@@ -1,7 +1,7 @@
 import {useQuery} from 'react-query';
 
-const baseUrl = 'http://www.omdbapi.com/?';
-const apiKey = "157f34ed";
+const baseUrl = (process.env.REACT_APP_PROTOCOL || 'http') + '://www.omdbapi.com/?';
+const apiKey = (process.env.REACT_APP_OMDB_API_KEY || 'apiKey');
 
 function yearFromString(keyword: string): string {
   const yearInParenthesesRegExp = /[(]\d{4}[)]/;
