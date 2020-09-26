@@ -21,9 +21,6 @@ export function MovieSearch() {
   const [keyword, setKeyword] = useState("");
   const {isLoading, isError} = useMovieSearch(keyword);
 
-  console.log('loading: ' + isLoading);
-  console.log('error: ' + isError);
-
   const cache = useQueryCache();
   let movies = cache.getQueryData(["movies", keyword]) as MovieResult[];
 

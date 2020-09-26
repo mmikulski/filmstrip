@@ -3,7 +3,7 @@ import {fade, makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-const SEARCH_INPUT_PLACEHOLDER = 'Type movie title...';
+const SEARCH_INPUT_PLACEHOLDER = 'Type movie title and (year)';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

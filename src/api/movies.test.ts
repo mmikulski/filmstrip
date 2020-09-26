@@ -1,4 +1,4 @@
-import {initialState, useMovies, useMovieSearch} from "./movies";
+import {buildSearchParams, useMovieSearch} from "./movies";
 import {act, renderHook} from "@testing-library/react-hooks";
 
 import fetchMock from "jest-fetch-mock";
@@ -76,3 +76,13 @@ describe("useMovies query", () => {
     expect(result.current.data).toHaveLength(response.length);
   })
 });
+
+describe("Year parser", () => {
+  const searchPhrase = "Blade (2010)";
+  const expectedSearchParams = "s=Blade (2010)&y=2010";
+
+  const result = buildSearchParams(searchPhrase);
+
+  expect(result).toEqual(expectedSearchParams);
+
+})
