@@ -1,5 +1,9 @@
 {
   "name": "filmstrip",
+  "author": {
+    "name": "Maciej Mikulski",
+    "email": "maciej.mikulski@sparklab.pl"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
