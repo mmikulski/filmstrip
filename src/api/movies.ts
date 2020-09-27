@@ -24,7 +24,7 @@ export function buildSearchParams(keyword: string) {
 
 export const useMovieSearch = (keyword: string) => {
   const apiKeyParam = 'apiKey=' + apiKey;
-  const searchParams = buildSearchParams(keyword);
+  const searchParams = keyword && buildSearchParams(keyword);
 
   return useQuery(
     ['movies', keyword],
